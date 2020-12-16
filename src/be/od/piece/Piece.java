@@ -8,13 +8,15 @@ import java.awt.*;
 import static be.od.game.Game.*;
 
 public abstract class Piece {
-    Board board;
+    protected Board board;
 
-    PieceColor pieceColor;
-    Type type;
+    protected PieceColor pieceColor;
+    protected Type type;
 
-    int x;
-    int y;
+    protected int x;
+    protected int y;
+
+    protected boolean isSelected;
 
     public Piece(int x, int y, PieceColor pieceColor, Type type, Board board) {
         this.pieceColor = pieceColor;
@@ -22,14 +24,11 @@ public abstract class Piece {
         this.y = Game.REAL_HEIGHT - heightMargin - (y + 1) * squareSide;
         this.board = board;
         this.type = type;
+        this.isSelected = false;
     }
 
     public PieceColor getPieceColor() {
         return pieceColor;
-    }
-
-    public void setPieceColor(PieceColor pieceColor) {
-        this.pieceColor = pieceColor;
     }
 
     public int getX() {
@@ -48,21 +47,36 @@ public abstract class Piece {
         this.y = y;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
     public abstract void tick();
+
     public void render(Graphics graphics) {
 
         graphics.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
 
-        if (this.pieceColor == PieceColor.WHITE) {
-            graphics.setColor(new Color(0, 150, 150));
-        } else {
-            graphics.setColor(new Color(150, 0, 0));
-        }
+        int lighter = 0;
+        if (isSelected) lighter = 50;
+            if (this.pieceColor == PieceColor.WHITE) {
+                graphics.setColor(new Color(0, 150 + lighter, 150 + lighter));
+            } else {
+                graphics.setColor(new Color(150 + lighter, 0, 0));
+            }
 
         int w = graphics.getFontMetrics().stringWidth(type.letter);
         int h = graphics.getFontMetrics().getHeight();
 
-        graphics.drawString(type.letter, (int)(x + squareSide/2d - w/2d), (int)(y + squareSide/2d + h/2d));
+        graphics.drawString(type.letter, (int) (x + squareSide / 2d - w / 2d), (int) (y + squareSide / 2d + h / 2d));
     }
 
     public abstract void move(int x, int y);
@@ -73,12 +87,12 @@ public abstract class Piece {
     }
 
     public enum Type {
-        PANW ("P"),
-        KNIGHT ("N"),
-        BISHOP ("B"),
-        ROOK ("R"),
-        QUEEN ("Q"),
-        KING ("K");
+        PANW("P"),
+        KNIGHT("N"),
+        BISHOP("B"),
+        ROOK("R"),
+        QUEEN("Q"),
+        KING("K");
 
         String letter;
 

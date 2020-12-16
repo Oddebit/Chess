@@ -23,6 +23,8 @@ public class Game extends Canvas implements Runnable {
     public Game() {
         this.board = new Board();
         new Window(WIDTH, HEIGHT, "CHESS", this);
+
+        new MouseInput(board);
     }
 
 

@@ -14,6 +14,10 @@ public class Game extends Canvas implements Runnable {
     public static final int REAL_WIDTH = WIDTH - 16, REAL_HEIGHT = HEIGHT - 39;
     public static final int WIDTH_CENTER = REAL_WIDTH / 2, HEIGHT_CENTER = REAL_HEIGHT / 2;
 
+    public static int squareSide = 60;
+    public static int widthMargin = (Game.REAL_WIDTH - 8 * squareSide)/2;
+    public static int heightMargin = (Game.REAL_HEIGHT - 8 * squareSide)/2;
+
     Board board;
 
     public Game() {

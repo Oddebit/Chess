@@ -2,10 +2,17 @@ package be.od.piece;
 
 import be.od.board.Board;
 
+import java.awt.*;
+
 public class Rook extends Piece {
 
     public Rook(int x, int y, PieceColor pieceColor, Board board) {
-        super(x, y, pieceColor, board);
+        super(x, y, pieceColor, Type.ROOK, board);
+    }
+
+    @Override
+    public void tick() {
+
     }
 
     @Override

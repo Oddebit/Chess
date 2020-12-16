@@ -2,10 +2,19 @@ package be.od.piece;
 
 import be.od.board.Board;
 
+import java.awt.*;
+
+import static be.od.game.Game.squareSide;
+
 public class Bishop extends Piece{
 
     public Bishop(int x, int y, PieceColor pieceColor, Board board) {
-        super(x, y, pieceColor, board);
+        super(x, y, pieceColor, Type.BISHOP, board);
+    }
+
+    @Override
+    public void tick() {
+
     }
 
     @Override

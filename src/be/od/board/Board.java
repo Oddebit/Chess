@@ -4,12 +4,12 @@ import be.od.game.Game;
 import be.od.piece.*;
 
 import java.awt.*;
-import java.awt.image.BufferStrategy;
+
+import static be.od.game.Game.*;
 
 public class Board extends Canvas {
 
     private Piece[][] chessBoard = new Piece[8][8];
-    int squareSide = 60;
 
     public Board(){
         addPieces();
@@ -39,29 +39,27 @@ public class Board extends Canvas {
         chessBoard[6][1] = new Pawn(6,1, Piece.PieceColor.WHITE, this);
         chessBoard[7][1] = new Pawn(7,1, Piece.PieceColor.WHITE, this);
 
-        chessBoard[0][6] = new Rook(0,6, Piece.PieceColor.WHITE, this);
-        chessBoard[1][6] = new Knight(1,6, Piece.PieceColor.WHITE, this);
-        chessBoard[2][6] = new Bishop(2,6, Piece.PieceColor.WHITE, this);
-        chessBoard[3][6] = new Queen(3,6, Piece.PieceColor.WHITE, this);
-        chessBoard[4][6] = new Knight(4,6, Piece.PieceColor.WHITE, this);
-        chessBoard[5][6] = new Bishop(5,6, Piece.PieceColor.WHITE, this);
-        chessBoard[6][6] = new Knight(6,6, Piece.PieceColor.WHITE, this);
-        chessBoard[7][6] = new Rook(7,6, Piece.PieceColor.WHITE, this);
-        chessBoard[0][7] = new Pawn(0,7, Piece.PieceColor.WHITE, this);
-        chessBoard[1][7] = new Pawn(1,7, Piece.PieceColor.WHITE, this);
-        chessBoard[2][7] = new Pawn(2,7, Piece.PieceColor.WHITE, this);
-        chessBoard[3][7] = new Pawn(3,7, Piece.PieceColor.WHITE, this);
-        chessBoard[4][7] = new Pawn(4,7, Piece.PieceColor.WHITE, this);
-        chessBoard[5][7] = new Pawn(5,7, Piece.PieceColor.WHITE, this);
-        chessBoard[6][7] = new Pawn(6,7, Piece.PieceColor.WHITE, this);
-        chessBoard[7][7] = new Pawn(7,7, Piece.PieceColor.WHITE, this);
+        chessBoard[0][7] = new Rook(0,7, Piece.PieceColor.BLACK, this);
+        chessBoard[1][7] = new Knight(1,7, Piece.PieceColor.BLACK, this);
+        chessBoard[2][7] = new Bishop(2,7, Piece.PieceColor.BLACK, this);
+        chessBoard[3][7] = new Queen(3,7, Piece.PieceColor.BLACK, this);
+        chessBoard[4][7] = new Knight(4,7, Piece.PieceColor.BLACK, this);
+        chessBoard[5][7] = new Bishop(5,7, Piece.PieceColor.BLACK, this);
+        chessBoard[6][7] = new Knight(6,7, Piece.PieceColor.BLACK, this);
+        chessBoard[7][7] = new Rook(7,7, Piece.PieceColor.BLACK, this);
+        chessBoard[0][6] = new Pawn(0,6, Piece.PieceColor.BLACK, this);
+        chessBoard[1][6] = new Pawn(1,6, Piece.PieceColor.BLACK, this);
+        chessBoard[2][6] = new Pawn(2,6, Piece.PieceColor.BLACK, this);
+        chessBoard[3][6] = new Pawn(3,6, Piece.PieceColor.BLACK, this);
+        chessBoard[4][6] = new Pawn(4,6, Piece.PieceColor.BLACK, this);
+        chessBoard[5][6] = new Pawn(5,6, Piece.PieceColor.BLACK, this);
+        chessBoard[6][6] = new Pawn(6,6, Piece.PieceColor.BLACK, this);
+        chessBoard[7][6] = new Pawn(7,6, Piece.PieceColor.BLACK, this);
 
 
     }
 
     public void render(Graphics graphics) {
-        int widthMargin = (Game.REAL_WIDTH - 8 * squareSide)/2;
-        int heightMargin = (Game.REAL_HEIGHT - 8 * squareSide)/2;
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -74,10 +72,10 @@ public class Board extends Canvas {
                 graphics.fillRect(widthMargin + i * squareSide,
                                 Game.REAL_HEIGHT - heightMargin - (j + 1) * squareSide,
                                     squareSide, squareSide);
-//                Piece tempPiece = chessBoard[i][j];
-//                if(tempPiece != null) {
-//                    chessBoard[i][j].render();
-//                }
+                Piece tempPiece = chessBoard[i][j];
+                if(tempPiece != null) {
+                    chessBoard[i][j].render(graphics);
+                }
             }
         }
     }

@@ -13,9 +13,4 @@ public class Queen extends Piece {
     public void tick() {
 
     }
-
-    @Override
-    public void move(int x, int y) {
-
-    }
 }

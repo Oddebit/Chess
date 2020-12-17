@@ -43,7 +43,7 @@ public class Board extends Canvas {
         chessBoard[1][7] = new Knight(1,7, Piece.PieceColor.BLACK, this);
         chessBoard[2][7] = new Bishop(2,7, Piece.PieceColor.BLACK, this);
         chessBoard[3][7] = new Queen(3,7, Piece.PieceColor.BLACK, this);
-        chessBoard[4][7] = new Knight(4,7, Piece.PieceColor.BLACK, this);
+        chessBoard[4][7] = new King(4,7, Piece.PieceColor.BLACK, this);
         chessBoard[5][7] = new Bishop(5,7, Piece.PieceColor.BLACK, this);
         chessBoard[6][7] = new Knight(6,7, Piece.PieceColor.BLACK, this);
         chessBoard[7][7] = new Rook(7,7, Piece.PieceColor.BLACK, this);

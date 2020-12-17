@@ -2,11 +2,7 @@ package be.od.piece;
 
 import be.od.board.Board;
 
-import java.awt.*;
-
-import static be.od.game.Game.squareSide;
-
-public class Bishop extends Piece{
+public class Bishop extends Piece {
 
     public Bishop(int x, int y, PieceColor pieceColor, Board board) {
         super(x, y, pieceColor, Type.BISHOP, board);
@@ -18,31 +14,36 @@ public class Bishop extends Piece{
     }
 
     @Override
-    public void move(int x, int y) {
+    public boolean canMove(int xDestination, int yDestination) {
 
-        int deltaX = this.x - x;
-        int deltaY = this.y - y;
+        int deltaX = xDestination - this.xSquare;
+        int deltaY = yDestination - this.ySquare;
 
-        if ((Math.abs(deltaX) != Math.abs(deltaY))|| (x == this.x && y == this.y)) return;
-        if (deltaX == deltaY){
-            for (int i = Math.min(x, this.x) + 1; i < Math.max(x, this.x) - 1; i++) {
-                for (int j = Math.min(y, this.y) + 1; j < Math.max(y, this.y) - 1; j++) {
-                    if(board.getChessBoard()[j][i] != null) return;
-                }
-            }
+        if (Math.abs(deltaX) != Math.abs(deltaY)) return false;
+        if (Math.abs(deltaX) == 1) return true;
+
+        int iterator;
+        if (this.xSquare < xDestination) {
+            iterator = 1;
         } else {
-            for (int i = Math.min(x, this.x) + 1; i < Math.max(x, this.x) - 1; i++) {
-                for (int j = Math.max(y, this.y) + 1; j < Math.min(y, this.y) - 1; j--) {
-                    if(board.getChessBoard()[j][i] != null) return;
-                }
+            iterator = -1;
+        }
+
+        if (deltaX == deltaY) {
+            // "/" diagonal
+
+            for (int i = iterator; Math.abs(i) < Math.abs(deltaX); i += iterator) {
+                if (board.getChessBoard()[this.xSquare + i][this.ySquare + i] != null) return false;
+            }
+
+        } else {
+            // "\" diagonal
+
+            for (int i = iterator; Math.abs(i) < Math.abs(deltaX); i += iterator) {
+                if (board.getChessBoard()[this.xSquare + i][this.ySquare - i] != null) return false;
             }
         }
 
-        if(board.getChessBoard()[x][y] == null || board.getChessBoard()[x][y].getPieceColor() != pieceColor) {
-            board.setPiecePosition(null, this.x, this.y);
-            board.setPiecePosition(this, x, y);
-            this.x = x;
-            this.y = y;
-        }
+        return true;
     }
 }

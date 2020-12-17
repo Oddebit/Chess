@@ -22,23 +22,16 @@ public class Bishop extends Piece {
         if (Math.abs(deltaX) != Math.abs(deltaY)) return false;
         if (Math.abs(deltaX) == 1) return true;
 
-        int iterator;
-        if (this.xSquare < xDestination) {
-            iterator = 1;
-        } else {
-            iterator = -1;
-        }
+        int iterator = this.xSquare < xDestination? 1 : -1;
 
         if (deltaX == deltaY) {
             // "/" diagonal
-
             for (int i = iterator; Math.abs(i) < Math.abs(deltaX); i += iterator) {
                 if (board.getChessBoard()[this.xSquare + i][this.ySquare + i] != null) return false;
             }
 
         } else {
             // "\" diagonal
-
             for (int i = iterator; Math.abs(i) < Math.abs(deltaX); i += iterator) {
                 if (board.getChessBoard()[this.xSquare + i][this.ySquare - i] != null) return false;
             }

@@ -13,4 +13,17 @@ public class Queen extends Piece {
     public void tick() {
 
     }
+
+    @Override
+    public boolean canMove(int xDestination, int yDestination) {
+        Piece tempPiece;
+
+        tempPiece = new Rook(xSquare, ySquare, pieceColor, board);
+        if(tempPiece.canMove(xDestination, yDestination)) return true;
+
+        tempPiece = new Bishop(xSquare, ySquare, pieceColor, board);
+        if(tempPiece.canMove(xDestination, yDestination)) return true;
+
+        return false;
+    }
 }

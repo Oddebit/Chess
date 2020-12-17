@@ -91,13 +91,13 @@ public abstract class Piece {
         return true;
     }
 
-    public void move(int xSquare, int ySquare) {
+    public void move(int xDestination, int yDestination) {
         board.setPiecePosition(null, this.xSquare, this.ySquare);
-        board.setPiecePosition(this, xSquare, ySquare);
-        this.xSquare = xSquare;
-        this.ySquare = ySquare;
-        this.x = widthMargin + xSquare * squareSide;
-        this.y = Game.REAL_HEIGHT - heightMargin - (ySquare + 1) * squareSide;
+        board.setPiecePosition(this, xDestination, yDestination);
+        this.xSquare = xDestination;
+        this.ySquare = yDestination;
+        this.x = widthMargin + xDestination * squareSide;
+        this.y = Game.REAL_HEIGHT - heightMargin - (yDestination + 1) * squareSide;
     }
 
     public enum PieceColor {

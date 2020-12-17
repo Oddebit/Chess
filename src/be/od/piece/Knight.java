@@ -13,4 +13,16 @@ public class Knight extends Piece{
     public void tick() {
 
     }
+
+    @Override
+    public boolean canMove(int xDestination, int yDestination) {
+
+        int deltaX = xDestination - this.xSquare;
+        int deltaY = yDestination - this.ySquare;
+
+        if(Math.abs(deltaX) == 2 && Math.abs(deltaY) == 1) return true;
+        if(Math.abs(deltaX) == 1 && Math.abs(deltaY) == 2) return true;
+
+        return false;
+    }
 }

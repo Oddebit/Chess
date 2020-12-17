@@ -16,12 +16,20 @@ public abstract class Piece {
     protected int x;
     protected int y;
 
+    protected int xSquare;
+    protected int ySquare;
+
     protected boolean isSelected;
 
     public Piece(int x, int y, PieceColor pieceColor, Type type, Board board) {
         this.pieceColor = pieceColor;
+
         this.x = widthMargin + x * squareSide;
         this.y = Game.REAL_HEIGHT - heightMargin - (y + 1) * squareSide;
+
+        this.xSquare = x;
+        this.ySquare = y;
+
         this.board = board;
         this.type = type;
         this.isSelected = false;
@@ -79,7 +87,14 @@ public abstract class Piece {
         graphics.drawString(type.letter, (int) (x + squareSide / 2d - w / 2d), (int) (y + squareSide / 2d + h / 2d));
     }
 
-    public abstract void move(int x, int y);
+    public void move(int xSquare, int ySquare) {
+        board.setPiecePosition(null, this.xSquare, this.ySquare);
+        board.setPiecePosition(this, xSquare, ySquare);
+        this.xSquare = xSquare;
+        this.ySquare = ySquare;
+        x = widthMargin + xSquare * squareSide;
+        y = Game.REAL_HEIGHT - heightMargin - (ySquare + 1) * squareSide;
+    }
 
     public enum PieceColor {
         BLACK,

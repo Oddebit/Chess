@@ -20,11 +20,12 @@ public class Game extends Canvas implements Runnable {
 
     Board board;
 
+
     public Game() {
         this.board = new Board();
         new Window(WIDTH, HEIGHT, "CHESS", this);
 
-        new MouseInput(board);
+        this.addMouseListener(new MouseInput(board));
     }
 
 
